@@ -15,8 +15,10 @@ Gem::Specification.new do |spec|
   spec.description   = %{
     Infopark WebCRM is a professional cloud CRM built for Ruby.
     For more information about Infopark WebCRM, please visit https://infopark.com/.
+    For more information about the Infopark WebCRM SDK for Ruby, please visit
+    http://www.rubydoc.info/gems/infopark_webcrm_sdk
   }
-  spec.homepage      = 'https://infopark.com'
+  spec.homepage      = 'https://github.com/infopark/webcrm_sdk'
   spec.license       = 'LGPL-3.0'
   spec.files         = ["README.md", "LICENSE", "UPGRADE.md", "config/ca-bundle.crt"] + Dir["lib/**/*"]
   spec.require_paths = ["lib"]
