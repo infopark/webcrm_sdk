@@ -93,11 +93,11 @@ contact.locality
 ### Searching for Contacts
 
 ```ruby
-Crm::Contact.where(:login, :is_term, 'root').first
+Crm::Contact.where(:login, :equals, 'root').first
 # => Crm::Contact
 
-Crm::Contact.where(:locality, :is_term, 'Boston').
-  and(:last_name, :is_prefix, 'S').
+Crm::Contact.where(:locality, :equals, 'Boston').
+  and(:last_name, :contains_word_prefixes, 'S').
   sort_by(:last_name).
   sort_order(:desc).
   limit(2).
