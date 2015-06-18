@@ -1,5 +1,6 @@
 # Infopark WebCRM SDK
 
+[![Gem Version](https://badge.fury.io/rb/infopark_webcrm_sdk.svg)](http://badge.fury.io/rb/infopark_webcrm_sdk)
 [![Build Status](https://travis-ci.org/infopark/webcrm_sdk.svg?branch=master)](https://travis-ci.org/infopark/webcrm_sdk)
 
 [Infopark WebCRM](https://infopark.com/) is a cloud-based CRM.
