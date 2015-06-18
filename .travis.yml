@@ -1,0 +1,30 @@
+---
+language: ruby
+rvm: 2.1.5
+cache: bundler
+sudo: false
+git:
+  # travis uses shallow clones (git clone --depth 50). The default is too small.
+  # Increasing the default to enable `git describe`
+  depth: 100
+env:
+  global:
+  - TRAVIS=true
+  # speed up "gem install nokogiri" by using systems libxml2
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  - CRM_TENANT=crmconnector
+  - CRM_URL=https://$CRM_TENANT.crm.infopark.net
+  - CRM_LOGIN=root
+  # CRM_API_KEY of infopark/webcrm_sdk:
+  - secure: "b2QZ8T7X80Ip9hMX0jjotoxpBcbzfYSKGNPheKiirlDt2r79FO7n0gTmdnEHEDoGEBBtHqR6Ca7mmdIjowZP03GyxT++5yOE+DDVgBiiBQVqbvNiK94yD7ccydzg51m7jI8Tm/zk9zt+Esetgl00Z1V+dNVBB4jtOGzhQqPMaU0="
+matrix:
+  exclude:
+    - rvm: 2.1.5
+  include:
+  - env: "TASK=default"
+  - env: "TASK=default"
+    rvm: 2.0.0
+  - env: "TASK=default"
+    rvm: 2.2.2
+  - env: "TASK=package:build"
+script: bundle exec rake $TASK
