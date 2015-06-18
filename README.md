@@ -1,6 +1,6 @@
 # Infopark WebCRM SDK
 
-[![Build Status](https://magnum.travis-ci.com/infopark/webcrm_sdk.svg?token=iixzKo9dcgfko6CA7rmm&branch=dev)](https://magnum.travis-ci.com/infopark/webcrm_sdk)
+[![Build Status](https://travis-ci.org/infopark/webcrm_sdk.svg?branch=master)](https://travis-ci.org/infopark/webcrm_sdk)
 
 [Infopark WebCRM](https://infopark.com/) is a cloud-based CRM.
 The Infopark WebCRM SDK makes CRM content available to your Ruby application.
