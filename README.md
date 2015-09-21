@@ -33,6 +33,10 @@ Crm.configure do |config|
 end
 ```
 
+## Documentation
+
+The documentation is available at [RubyDoc.info](http://www.rubydoc.info/gems/infopark_webcrm_sdk).
+
 ## Example Usage
 
 The Infopark WebCRM SDK provides the following Infopark WebCRM resources to your Ruby application:
