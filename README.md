@@ -21,8 +21,6 @@ Install the gem with [Bundler](http://bundler.io/):
 
 ## Configuration
 
-You can obtain your API credentials from the [Infopark Console](https://console.infopark.net/).
-
 ```ruby
 require 'infopark_webcrm_sdk'
 
