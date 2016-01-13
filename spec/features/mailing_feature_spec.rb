@@ -263,14 +263,14 @@ describe 'mailing features' do
         last_name: 'Doe',
         gender: 'M',
         language: 'en',
-        email: 'bounce@simulator.amazonses.com',
+        email: 'success@simulator.amazonses.com',
       })
     }
 
     it 'sends a single email' do
       mailing.release
       expect(mailing.send_single_email(contact.id)).to eq(
-          {"message" => "e-mail sent to bounce@simulator.amazonses.com"})
+          {"message" => "e-mail sent to success@simulator.amazonses.com"})
     end
 
     it 'handles errors correctly' do
