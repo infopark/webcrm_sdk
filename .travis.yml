@@ -26,5 +26,7 @@ matrix:
     rvm: 2.0.0
   - env: "TASK=default"
     rvm: 2.2.2
+  - env: "TASK=default"
+    rvm: 2.3.0
   - env: "TASK=package:build"
 script: bundle exec rake $TASK
