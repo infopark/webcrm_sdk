@@ -405,11 +405,11 @@ mailing.render_preview(contact_id)
 # }
 ```
 
-`Mailing#send_single_email` sends an e-mail to an individual contact after the mailing has already been released.
+`Mailing#send_single_email` sends an email to an individual contact after the mailing has already been released.
 
-`Mailing#send_me_a_proof_email` sends an e-mail to the authenticated API user, i.e. to the user you configured in the `Crm.configure` block.
+`Mailing#send_me_a_proof_email` sends an email to the authenticated API user, i.e. to the user you configured in the `Crm.configure` block.
 
-`Mailing#release` releases a mailing and sends e-mails to all recipients.
+`Mailing#release` releases a mailing and sends emails to all recipients.
 
 ```ruby
 recipients = Crm::Collection.create({
