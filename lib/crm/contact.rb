@@ -68,7 +68,7 @@ module Crm
 
     # Generates a password token.
     #
-    # Use case: A project sends an e-mail to the contact. The e-mail contains a link to
+    # Use case: A project sends an email to the contact. The email contains a link to
     # the project web app. The link contains the param +?token=...+.
     # The web app retrieves and parses the token
     # and passes it to {Contact.set_password_by_token}.
@@ -81,7 +81,7 @@ module Crm
     # Sets a contact's new password by means of the token. Generate a token by calling
     # {#send_password_token_email} or {#generate_password_token}.
     #
-    # Use case: A contact clicks a link (that includes a token) in an e-mail
+    # Use case: A contact clicks a link (that includes a token) in an email
     # to get to a password change page.
     # @param new_password [String] the new password.
     # @param token [String] the given token.
@@ -102,7 +102,7 @@ module Crm
       load_attributes(Core::RestApi.instance.put("#{path}/clear_password", {}))
     end
 
-    # Sends a password token by e-mail to this contact.
+    # Sends a password token by email to this contact.
     #
     # Put a link to the project web app into the +password_request_email_body+ template.
     # The link should contain the +?token=...+ parameter, e.g.:

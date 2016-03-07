@@ -1,7 +1,7 @@
 module Crm
-  # The purpose of an Infopark WebCRM mailing is to send an e-mail, e.g. a newsletter,
+  # The purpose of an Infopark WebCRM mailing is to send an email, e.g. a newsletter,
   # to several recipients.
-  # The e-mails will be sent to the members of the contact collection associated with the mailing
+  # The emails will be sent to the members of the contact collection associated with the mailing
   # (+mailing.collection_id+).
   #
   # Infopark WebCRM uses the {http://liquidmarkup.org/ Liquid template engine} for evaluating
@@ -19,7 +19,7 @@ module Crm
     # @!parse extend Core::Mixins::Modifiable::ClassMethods
     # @!parse extend Core::Mixins::Searchable::ClassMethods
 
-    # Renders a preview of the e-mail for the given contact.
+    # Renders a preview of the email for the given contact.
     # @example
     #   mailing.html_body
     #   # => "<h1>Welcome {{contact.first_name}} {{contact.last_name}}</h1>"
@@ -37,7 +37,7 @@ module Crm
     #   #  "html_body" => "<h1>Welcome John Doe</h1>"
     #   # }
     # @param render_for_contact_or_id [String, Contact]
-    #   the contact for which the e-mail preview is rendered.
+    #   the contact for which the email preview is rendered.
     # @return [Hash{String => String}] the values of the mailing fields evaluated
     #   in the context of the contact.
     # @api public
@@ -47,14 +47,14 @@ module Crm
       })
     end
 
-    # Sends a proof e-mail (personalized for a contact) to the current user (the API user).
+    # Sends a proof email (personalized for a contact) to the current user (the API user).
     # @example
     #   mailing.send_me_a_proof_email(contact)
     #   # => {
-    #   #   "message" => "e-mail sent to api_user@example.com"
+    #   #   "message" => "email sent to api_user@example.com"
     #   # }
     # @param render_for_contact_or_id [String, Contact]
-    #   the contact for which the proof e-mail is rendered.
+    #   the contact for which the proof email is rendered.
     # @return [Hash{String => String}] a status report.
     # @api public
     def send_me_a_proof_email(render_for_contact_or_id)
@@ -76,10 +76,10 @@ module Crm
     #
     #   mailing.send_single_email(contact)
     #   # => {
-    #   #   "message" => "e-mail sent to john.doe@example.org"
+    #   #   "message" => "email sent to john.doe@example.org"
     #   # }
     # @param recipient_contact_or_id [String, Contact]
-    #   the contact to send a single e-mail to.
+    #   the contact to send a single email to.
     # @return [Hash{String => String}] a status report.
     # @api public
     def send_single_email(recipient_contact_or_id)

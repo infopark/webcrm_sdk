@@ -237,7 +237,7 @@ describe 'mailing features' do
 
     it 'sends a proof email to me (the api user)' do
       expect(mailing.send_me_a_proof_email(contact.id)).to eq(
-          {"message" => "e-mail sent to success@simulator.amazonses.com"})
+          {"message" => "email sent to success@simulator.amazonses.com"})
     end
 
     it 'handles errors correctly' do
@@ -270,7 +270,7 @@ describe 'mailing features' do
     it 'sends a single email' do
       mailing.release
       expect(mailing.send_single_email(contact.id)).to eq(
-          {"message" => "e-mail sent to success@simulator.amazonses.com"})
+          {"message" => "email sent to success@simulator.amazonses.com"})
     end
 
     it 'handles errors correctly' do

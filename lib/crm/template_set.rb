@@ -1,7 +1,7 @@
 module Crm
   # +TemplateSet+ represents the Infopark WebCRM template set singleton.
   # The templates of the {.singleton template set singleton} can be used to render customized text,
-  # e.g. a mailing greeting or a password request e-mail body (+password_request_email_body+).
+  # e.g. a mailing greeting or a password request email body (+password_request_email_body+).
   #
   # Infopark WebCRM uses the {http://liquidmarkup.org/ Liquid template engine} for evaluating
   # the templates.

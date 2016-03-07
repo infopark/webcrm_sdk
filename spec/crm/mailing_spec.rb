@@ -69,7 +69,7 @@ describe Mailing do
 
   describe '#send_me_a_proof_email' do
     let(:mailing) { Mailing.new("id" => "abc") }
-    let(:proof_output) { { "message" => "e-mail sent to apiuser.email" } }
+    let(:proof_output) { { "message" => "email sent to apiuser.email" } }
 
     before do
       expect(Core::RestApi.instance).to receive(:post).with(
@@ -107,7 +107,7 @@ describe Mailing do
 
   describe '#send_single_email' do
     let(:mailing) { Mailing.new("id" => "abc") }
-    let(:single_email_output) { { "message" => "e-mail sent to contact.email" } }
+    let(:single_email_output) { { "message" => "email sent to contact.email" } }
 
     before do
       expect(Core::RestApi.instance).to receive(:post).with(
