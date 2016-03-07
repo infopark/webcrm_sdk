@@ -9,7 +9,7 @@ class CaBundle
 
   def create
     ca_bundle_file = File.expand_path('../ca_bundle.pl', __FILE__)
-    %x{#{ca_bundle_file} -u -p SERVER_AUTH:TRUSTED_DELEGATOR,MUST_VERIFY_TRUST #{@path}}
+    %x{#{ca_bundle_file} -u #{@path}}
   end
 
   def verify(url)
