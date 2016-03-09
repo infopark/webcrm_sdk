@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'rake'
+gem 'rake', '~> 10.5.0'
 gem 'rspec', '~> 3.0'
 gem 'webmock', require: false
 gem 'autotest'
