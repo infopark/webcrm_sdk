@@ -172,7 +172,6 @@ describe 'collection features' do
 
       collection.compute
 
-      expect(collection.computation_started_at).to be_present
       Patience.try do
         collection.reload
         expect(collection.output_ids_computed_at).to be_present
