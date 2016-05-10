@@ -333,7 +333,7 @@ describe RestApi do
   end
 
   describe 'using webmock' do
-    let(:api_url) { rest_api.resolve_uri('').to_s.sub("://", "://#{login}:#{api_key}@") }
+    let(:api_url) { rest_api.resolve_uri('').to_s }
 
     describe 'error handling' do
       before { WebMock.enable! }
@@ -347,7 +347,10 @@ describe RestApi do
         end
 
         before do
-          stub_request(:get, "#{api_url}0815").to_return(body: response_body, status: 401)
+          basic = Base64.encode64("#{login}:#{api_key}").chomp
+          stub_request(:get, "#{api_url}0815").
+              with(headers: {'Authorization' => "Basic #{basic}"}).
+              to_return(body: response_body, status: 401)
         end
 
         it 'raises a UnauthorizedAccess error' do
