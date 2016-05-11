@@ -4,7 +4,7 @@ gemspec
 
 gem 'rake', '~> 10.5.0'
 gem 'rspec', '~> 3.0'
-gem 'webmock', require: false
+gem 'webmock', '~> 2.0', require: false
 gem 'autotest'
 gem 'rspec-autotest'
 gem 'pry'

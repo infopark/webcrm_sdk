@@ -347,9 +347,7 @@ describe RestApi do
         end
 
         before do
-          basic = Base64.encode64("#{login}:#{api_key}").chomp
-          stub_request(:get, "#{api_url}0815").
-              with(headers: {'Authorization' => "Basic #{basic}"}).
+          stub_request(:get, "#{api_url}0815").with(basic_auth: [login, api_key]).
               to_return(body: response_body, status: 401)
         end
 
