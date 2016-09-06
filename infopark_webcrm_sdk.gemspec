@@ -23,8 +23,8 @@ Gem::Specification.new do |spec|
   spec.files         = ["README.md", "LICENSE", "UPGRADE.md", "config/ca-bundle.crt"] + Dir["lib/**/*"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency('actionpack', '~> 4.0')
-  spec.add_dependency('activesupport', '~> 4.0')
+  spec.add_dependency('actionpack', '> 4.0')
+  spec.add_dependency('activesupport', '> 4.0')
   spec.add_dependency('multi_json', '~> 1.0')
   spec.add_dependency('multipart-post', '~> 2.0')
   spec.add_dependency('addressable', '~> 2.0')

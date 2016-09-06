@@ -1,6 +1,5 @@
 require 'infopark_webcrm_sdk'
 require 'webmock/rspec'
-require 'infopark_crm_connector'
 require 'patience'
 
 # only enable WebMock when needed!
