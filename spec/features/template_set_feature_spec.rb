@@ -80,7 +80,6 @@ describe 'template set features' do
         foo: 'welcome!'
       }
       )).to include({
-        'digest_email_bcc' => '',
         'greeting' => 'Dear Smith, welcome!',
       })
     end
