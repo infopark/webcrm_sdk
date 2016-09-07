@@ -6,10 +6,10 @@ gem 'appraisal'
 gem 'autotest'
 gem 'github-markup'
 gem 'pry'
-gem 'rake', '~> 10.5.0'
+gem 'rake'
 gem 'redcarpet'
 gem 'rest-client'
 gem 'rspec-autotest'
-gem 'rspec', '~> 3.0'
-gem 'webmock', '~> 2.0', require: false
+gem 'rspec'
+gem 'webmock', require: false
 gem 'yard'
