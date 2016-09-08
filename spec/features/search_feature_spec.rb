@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'search features' do
+  before(:all) { CrmSetup.define_support_case }
 
   context 'when searching for multiple items' do
     let(:family_name) { "Johnson #{SecureRandom.hex(4)}" }

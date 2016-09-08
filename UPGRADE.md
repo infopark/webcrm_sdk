@@ -14,6 +14,8 @@ gem "infopark_crm_connector"
 gem "infopark_webcrm_sdk"
 ```
 
+Please note that `infopark_crm_connector` does not support Rails 5. The latest supported version of Rails is 4.
+
 ## Configuring the Infopark WebCRM SDK
 
 Then, configure the Infopark WebCRM SDK to use your personal credentials when connecting to the Infopark WebCRM REST API.

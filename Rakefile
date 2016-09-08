@@ -1,3 +1,5 @@
+require "rubygems"
+require "bundler/setup"
 require 'rspec/core/rake_task'
 
 FileList["./tasks/**/*.rake"].sort.each do |source|
