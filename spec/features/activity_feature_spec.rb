@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'activity features' do
   before(:all) { CrmSetup.define_support_case }
 

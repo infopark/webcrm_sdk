@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'account features' do
   describe 'create' do
     it 'creates under certain conditions' do

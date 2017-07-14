@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'search features' do
   before(:all) { CrmSetup.define_support_case }
 

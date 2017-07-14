@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Crm; module Core
 
 describe SearchConfigurator do

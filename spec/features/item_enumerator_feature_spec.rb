@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'ItemEnumerator features' do
   context 'with no IDs given' do
     it 'returns an empty array' do

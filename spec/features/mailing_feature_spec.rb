@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'mailing features' do
   before(:all) { CrmSetup.define_newsletter_mailing }
   let(:now) { Time.now.utc.xmlschema }

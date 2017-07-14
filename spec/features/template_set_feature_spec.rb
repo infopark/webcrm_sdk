@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'template set features' do
   let(:template_set) { Crm::TemplateSet.singleton }
   let(:now) { Time.now.utc.xmlschema }

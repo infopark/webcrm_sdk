@@ -1,6 +1,3 @@
-# encoding: utf-8
-require "spec_helper"
-
 def resource_path
   'random_resource_path'
 end

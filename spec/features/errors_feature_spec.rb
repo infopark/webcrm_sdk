@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'errors features' do
   context 'when sending too many parameters' do
     it 'raises a TooManyParams error' do

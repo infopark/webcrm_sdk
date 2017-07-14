@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module Crm
 
 describe Type do

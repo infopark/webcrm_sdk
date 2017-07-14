@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'active_support/log_subscriber/test_helper'
 
 module Crm; module Core

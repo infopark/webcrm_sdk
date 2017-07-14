@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'event features' do
   before(:all) { CrmSetup.define_base_event }
 

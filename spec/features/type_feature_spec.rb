@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'type features' do
   let(:type_id) { "my-activity-#{SecureRandom.hex(4)}" }
 

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe 'Crm.find features' do
   let(:contact) do
     Crm::Contact.create({
