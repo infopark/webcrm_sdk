@@ -74,7 +74,8 @@ RSpec.configure do |config|
       c.login = ENV['CRM_LOGIN']
       c.tenant = ENV['CRM_TENANT']
       c.endpoint = ENV['CRM_ENDPOINT']
-      # c.logger = Logger.new($stderr)
+      c.logger = Logger.new($stderr)
+      c.logger.level = Logger::ERROR
     end
   end
 end
