@@ -21,12 +21,6 @@ matrix:
     - rvm: 2.3.0
   include:
   - env: "TASK=default"
-    rvm: 2.2.2
-    gemfile: gemfiles/rails_4.gemfile
-  - env: "TASK=default"
-    rvm: 2.2.2
-    gemfile: gemfiles/rails_5.gemfile
-  - env: "TASK=default"
     rvm: 2.3.0
     gemfile: gemfiles/rails_4.gemfile
   - env: "TASK=default"
