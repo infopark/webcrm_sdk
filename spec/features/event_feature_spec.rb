@@ -108,41 +108,7 @@ describe 'event features' do
       expect{
         outdated_event.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete event
-      expect(event).to_not be_deleted
       event.delete
-      expect(event).to be_deleted
-      expect(Crm::Event.find(event.id)).to be_deleted
-
-      # fail, when precondition not met
-      expect{ event.delete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-  end
-
-  describe 'undelete' do
-    let(:event) {
-      Crm::Event.create({
-        dtstart_at: now,
-        dtend_at: now,
-        title: 'My Event',
-        attribute_definitions: {},
-        type_id: 'base-event',
-      })
-    }
-
-    before do
-      event.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(event).to be_deleted
-      event.undelete
-      expect(event).to_not be_deleted
-      expect(Crm::Event.find(event.id)).to_not be_deleted
-
-      # fail, when precondition not met
-      expect{ event.undelete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
     end
   end
 
@@ -158,7 +124,7 @@ describe 'event features' do
     }
 
     before do
-      event.delete
+      event.update({title: 'My Event 2'})
     end
 
     it 'looks for changes' do
@@ -166,14 +132,14 @@ describe 'event features' do
       expect(changes.length).to eq(1)
 
       delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+        change.details.has_key?('title')
       end
       expect(delete_change.changed_at).to be_a(Time)
       expect(delete_change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
-      expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      detail = delete_change.details['title']
+      expect(detail.before).to eq('My Event')
+      expect(detail.after).to eq('My Event 2')
     end
   end
 

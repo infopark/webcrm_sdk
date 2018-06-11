@@ -146,14 +146,6 @@ describe RestApi do
 
           rest_api.delete(resource_path)
         end
-
-        it 'should decode json' do
-          expect(connection_manager).to receive(:request).and_return(mock_response)
-
-          expect(rest_api.delete(resource_path)).to eq({
-            "expected_result" => true
-          })
-        end
       end
 
       context 'with a payload' do

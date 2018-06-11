@@ -157,17 +157,10 @@ describe 'search features' do
       activity.destroy
     end
 
-    it 'lists all activities (with or without deleted)' do
-      all_without_deleted = Crm::Activity.all
-      all_with_deleted = Crm::Activity.all(include_deleted: true)
-
-      expect(all_without_deleted).to be_a(Crm::Core::ItemEnumerator)
-      expect(all_with_deleted).to be_a(Crm::Core::ItemEnumerator)
-
-      expect(all_without_deleted.ids).to_not include(activity.id)
-      expect(all_with_deleted.ids).to include(activity.id)
-
-      expect(all_without_deleted.length).to be < all_with_deleted.length
+    it 'lists all activities' do
+      all = Crm::Activity.all
+      expect(all).to be_a(Crm::Core::ItemEnumerator)
+      expect(all.ids).to_not include(activity.id)
     end
   end
 end

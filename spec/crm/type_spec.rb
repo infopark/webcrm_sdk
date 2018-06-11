@@ -37,9 +37,8 @@ describe Type do
   end
 
   describe '.all' do
-    it 'returns all types (without deleted)' do
-      expect(Core::RestApi.instance).to receive(:get).with(
-          'types', {include_deleted: false}).and_return([
+    it 'returns all types' do
+      expect(Core::RestApi.instance).to receive(:get).with('types').and_return([
         {
           "id" => "mailing",
           "item_base_type" => "Mailing",
@@ -55,22 +54,6 @@ describe Type do
       expect(result.map(&:id)).to eq(["mailing", "support-case"])
       expect(result.map(&:item_base_type)).to eq(["Mailing", "Activity"])
       expect(result).to all( be_a(::Crm::Type) )
-    end
-
-    context '.all(include_deleted: true)' do
-      it 'returns all types with deleted' do
-        expect(Core::RestApi.instance).to receive(:get).with(
-            'types', {include_deleted: true}).and_return([])
-        Type.all(include_deleted: true)
-      end
-    end
-
-    context '.all(include_deleted: false)' do
-      it 'returns all types with deleted' do
-        expect(Core::RestApi.instance).to receive(:get).with(
-            'types', {include_deleted: false}).and_return([])
-        Type.all(include_deleted: false)
-      end
     end
   end
 end

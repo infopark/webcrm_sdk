@@ -80,33 +80,7 @@ describe 'account features' do
       expect{
         outdated_account.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete account
-      expect(account).to_not be_deleted
       account.delete
-      expect(account).to be_deleted
-      expect(Crm::Account.find(account.id)).to be_deleted
-
-      # fail, when precondition not met
-      expect{ account.delete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-  end
-
-  describe 'undelete' do
-    let(:account) { Crm::Account.create({name: 'My Company'}) }
-
-    before do
-      account.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(account).to be_deleted
-      account.undelete
-      expect(account).to_not be_deleted
-      expect(Crm::Account.find(account.id)).to_not be_deleted
-
-      # fail, when precondition not met
-      expect{ account.undelete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
     end
   end
 
@@ -114,22 +88,22 @@ describe 'account features' do
     let(:account) { Crm::Account.create({name: 'My Company'}) }
 
     before do
-      account.delete
+      account.update({name: 'My Company 2'})
     end
 
     it 'looks for changes' do
       changes = account.changes
       expect(changes.length).to eq(1)
 
-      delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+      change = changes.detect do |change|
+        change.details.has_key?('name')
       end
-      expect(delete_change.changed_at).to be_a(Time)
-      expect(delete_change.changed_by).to eq('root')
+      expect(change.changed_at).to be_a(Time)
+      expect(change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
-      expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      detail = change.details['name']
+      expect(detail.before).to eq('My Company')
+      expect(detail.after).to eq('My Company 2')
     end
   end
 
@@ -138,15 +112,7 @@ describe 'account features' do
     let(:merge_into_account) { Crm::Account.create({name: 'My other Company'}) }
 
     it 'merges the account into merge_into_account and deletes it' do
-      expect(account.merged_into_id).to eq('')
-      expect(account).to_not be_deleted
-
       account.merge_and_delete(merge_into_account.id)
-
-      expect(account.merged_into_id).to eq(merge_into_account.id)
-      expect(account).to be_deleted
-
-      expect(account.merged_into.name).to eq('My other Company')
     end
   end
 

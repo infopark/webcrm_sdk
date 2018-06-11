@@ -19,14 +19,12 @@ module Crm; module Core; module Mixins
 
       # Returns an {Crm::Core::ItemEnumerator enumerator} for iterating over all items
       # of this base type. The items are sorted by +created_at+.
-      # @param include_deleted [Boolean] whether to include deleted items. Default: +false+.
       # @return [ItemEnumerator]
       # @api public
-      def all(include_deleted: false)
+      def all
         search_configurator.
             sort_by('created_at').
             unlimited.
-            include_deleted(include_deleted).
             perform_search
       end
 

@@ -87,8 +87,7 @@ module Crm
   #     limit: 20,
   #     offset: 10,
   #     sort_by: 'created_at',
-  #     sort_order: 'desc',
-  #     include_deleted: true
+  #     sort_order: 'desc'
   #   )
   #   # => Crm::Core::ItemEnumerator with max 20 contacts with last name Johnson from Boston.
   # @param filters [Array<Hash{String => String}>]
@@ -111,13 +110,10 @@ module Crm
   #   * +updated_at+
   # @param sort_order [String] One of +asc+ (ascending) or +desc+ (descending).
   #   For +sort_by+ +score+, the only valid sort order is +desc+ (can be omitted).
-  # @param include_deleted [Boolean]
-  #   whether to include deleted items in the results. Server default: +false+.
   # @return [Crm::Core::ItemEnumerator]
   #   An {Crm::Core::ItemEnumerator enumerator} to iterate over the found items.
   # @api public
-  def self.search(filters: nil, query: nil, limit: :none, offset: 0, sort_by: nil,
-      sort_order: nil, include_deleted: nil)
+  def self.search(filters: nil, query: nil, limit: :none, offset: 0, sort_by: nil, sort_order: nil)
     server_limit = 100
     limit = Float::INFINITY if limit.nil? || limit == :none
     offset ||= 0
@@ -134,7 +130,6 @@ module Crm
         'offset' => offset,
         'sort_by' => sort_by,
         'sort_order' => sort_order,
-        'include_deleted' => include_deleted,
       }.reject { |k, v| v.nil? }
       search_results = Core::RestApi.instance.post('search', params)
       ids.concat(search_results['results'].map { |r| r['id'] })

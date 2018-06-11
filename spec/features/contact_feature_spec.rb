@@ -92,38 +92,7 @@ describe 'contact features' do
       expect{
         outdated_contact.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete contact
-      expect(contact).to_not be_deleted
       contact.delete
-      expect(contact).to be_deleted
-      expect(Crm::Contact.find(contact.id)).to be_deleted
-
-      # fail, when precondition not met
-      expect{ contact.delete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-  end
-
-  describe 'undelete' do
-    let(:contact) {
-      Crm::Contact.create({
-        language: 'en',
-        last_name: 'Smith',
-      })
-    }
-
-    before do
-      contact.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(contact).to be_deleted
-      contact.undelete
-      expect(contact).to_not be_deleted
-      expect(Crm::Contact.find(contact.id)).to_not be_deleted
-
-      # fail, when precondition not met
-      expect{ contact.undelete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
     end
   end
 
@@ -132,26 +101,27 @@ describe 'contact features' do
       Crm::Contact.create({
         language: 'en',
         last_name: 'Smith',
+        first_name: 'John',
       })
     }
 
     before do
-      contact.delete
+      contact.update({first_name: 'Jane'})
     end
 
     it 'looks for changes' do
       changes = contact.changes
       expect(changes.length).to eq(1)
 
-      delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+      change = changes.detect do |change|
+        change.details.has_key?('first_name')
       end
-      expect(delete_change.changed_at).to be_a(Time)
-      expect(delete_change.changed_by).to eq('root')
+      expect(change.changed_at).to be_a(Time)
+      expect(change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
-      expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      detail = change.details['first_name']
+      expect(detail.before).to eq('John')
+      expect(detail.after).to eq('Jane')
     end
   end
 
@@ -232,15 +202,7 @@ describe 'contact features' do
     }
 
     it 'merges the contact into merge_into_contact and deletes it' do
-      expect(contact.merged_into_id).to eq('')
-      expect(contact).to_not be_deleted
-
       contact.merge_and_delete(merge_into_contact.id)
-
-      expect(contact.merged_into_id).to eq(merge_into_contact.id)
-      expect(contact).to be_deleted
-
-      expect(contact.merged_into.last_name).to eq('Jones')
     end
   end
 

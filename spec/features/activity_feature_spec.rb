@@ -98,39 +98,7 @@ describe 'activity features' do
       expect{
         outdated_activity.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete activity
-      expect(activity).to_not be_deleted
       activity.delete
-      expect(activity).to be_deleted
-      expect(Crm::Activity.find(activity.id)).to be_deleted
-
-      # fail, when precondition not met
-      expect{ activity.delete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-  end
-
-  describe 'undelete' do
-    let(:activity) {
-      Crm::Activity.create({
-        title: 'My Activity',
-        type_id: 'support-case',
-        state: 'created',
-      })
-    }
-
-    before do
-      activity.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(activity).to be_deleted
-      activity.undelete
-      expect(activity).to_not be_deleted
-      expect(Crm::Activity.find(activity.id)).to_not be_deleted
-
-      # fail, when precondition not met
-      expect{ activity.undelete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
     end
   end
 
@@ -144,22 +112,22 @@ describe 'activity features' do
     }
 
     before do
-      activity.delete
+      activity.update({title: 'My Activity 2'})
     end
 
     it 'looks for changes' do
       changes = activity.changes
       expect(changes.length).to eq(1)
 
-      delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+      change = changes.detect do |change|
+        change.details.has_key?('title')
       end
-      expect(delete_change.changed_at).to be_a(Time)
-      expect(delete_change.changed_by).to eq('root')
+      expect(change.changed_at).to be_a(Time)
+      expect(change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
-      expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      detail = change.details['title']
+      expect(detail.before).to eq('My Activity')
+      expect(detail.after).to eq('My Activity 2')
     end
   end
 

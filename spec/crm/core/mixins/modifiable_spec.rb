@@ -83,41 +83,10 @@ describe Modifiable do
       let(:resource) { MyResource.new({'id' => 'abc', 'name' => 'foo', 'version' => 2})}
 
       it 'deletes the resource' do
-        expect(resource).to_not be_deleted
-
         expect(RestApi.instance).to receive(:delete).with(
-            'my_resources/abc', nil, {'If-Match' => 2}).and_return({
-          'id' => 'abc',
-          'name' => 'foo',
-          'deleted_at' => now,
-        })
-        expect(resource.public_send(method)).to be(resource)
-
-        expect(resource.name).to eq('foo')
-        expect(resource.deleted_at).to eq(now)
-
-        expect(resource).to be_deleted
+            'my_resources/abc', nil, {'If-Match' => 2})
+        resource.public_send(method)
       end
-    end
-  end
-
-  describe '#undelete' do
-    let(:resource) { MyResource.new({'id' => 'abc', 'name' => 'foo', 'deleted_at' => now})}
-
-    it 'undeletes the resource' do
-      expect(resource).to be_deleted
-
-      expect(RestApi.instance).to receive(:put).with('my_resources/abc/undelete', {}).and_return({
-        'id' => 'abc',
-        'name' => 'foo',
-        'deleted_at' => nil,
-      })
-      expect(resource.undelete).to be(resource)
-
-      expect(resource.name).to eq('foo')
-      expect(resource.deleted_at).to be_nil
-
-      expect(resource).to_not be_deleted
     end
   end
 end

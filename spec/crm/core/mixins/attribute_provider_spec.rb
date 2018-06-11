@@ -49,7 +49,6 @@ describe AttributeProvider do
         'blub' => 2342,
         'bla' => nil,
         'started_at' => now,
-        'deleted_at' => nil,
         'my_hash' => {'abc' => 'xyz'},
         'located_at' => 'This is not a date, but ends with _at',
       })
@@ -61,7 +60,6 @@ describe AttributeProvider do
         [:blub, 2342],
         [:bla, nil],
         [:started_at, Time.parse(now)],
-        [:deleted_at, nil],
         [:my_hash, {'abc' => 'xyz'}],
         [:located_at, nil],
       ].each do |key, expected_value|
@@ -112,7 +110,6 @@ describe AttributeProvider do
         item.update_attributes({
           'foo' => 'bar',
           'started_at' => '2014-11-10T10:34:00Z',
-          'deleted_at' => nil,
           'located_at' => 'This is not a date, but ends with _at',
         })
       end
@@ -126,9 +123,6 @@ describe AttributeProvider do
           expect(item.raw(:started_at)).to be_a(String)
           expect(item.raw('started_at')).to eq('2014-11-10T10:34:00Z')
           expect(item.raw(:started_at)).to eq('2014-11-10T10:34:00Z')
-
-          expect(item.raw('deleted_at')).to be_nil
-          expect(item.raw(:deleted_at)).to be_nil
 
           expect(item.raw('located_at')).to eq('This is not a date, but ends with _at')
           expect(item.raw(:located_at)).to eq('This is not a date, but ends with _at')
@@ -176,7 +170,6 @@ describe AttributeProvider do
         expect(item.methods).to include(*[
           :bla,
           :blub,
-          :deleted_at,
           :foo,
           :located_at,
           :my_hash,

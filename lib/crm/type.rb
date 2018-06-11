@@ -66,11 +66,10 @@ module Crm
     # @!parse extend Core::Mixins::Modifiable::ClassMethods
 
     # Returns all types.
-    # @param include_deleted [Boolean] whether to include deleted types. Default: +false+.
     # @return [Array<Type>]
     # @api public
-    def self.all(include_deleted: false)
-      Core::RestApi.instance.get('types', { include_deleted: include_deleted }).map do |item|
+    def self.all
+      Core::RestApi.instance.get('types').map do |item|
         new(item)
       end
     end

@@ -127,41 +127,7 @@ describe 'event contact features' do
       expect{
         outdated_event_contact.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete event contact
-      expect(event_contact).to_not be_deleted
       event_contact.delete
-      expect(event_contact).to be_deleted
-      expect(Crm::EventContact.find(event_contact.id)).to be_deleted
-
-      # fail, when precondition not met
-      expect{ event_contact.delete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-  end
-
-  describe 'undelete' do
-    let(:event_contact) {
-      Crm::EventContact.create({
-        event_id: event.id,
-        contact_id: contact.id,
-        state: 'registered',
-      })
-    }
-
-    before do
-      event_contact.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(event_contact).to be_deleted
-      event_contact.undelete
-      expect(event_contact).to_not be_deleted
-      expect(Crm::EventContact.find(event_contact.id)).to_not be_deleted
-
-      # fail, when precondition not met
-      expect {
-        event_contact.undelete
-      }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
     end
   end
 
@@ -175,22 +141,22 @@ describe 'event contact features' do
     }
 
     before do
-      event_contact.delete
+      event_contact.update({state: 'attended'})
     end
 
     it 'looks for changes' do
       changes = event_contact.changes
       expect(changes.length).to eq(1)
 
-      delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+      change = changes.detect do |change|
+        change.details.has_key?('state')
       end
-      expect(delete_change.changed_at).to be_a(Time)
-      expect(delete_change.changed_by).to eq('root')
+      expect(change.changed_at).to be_a(Time)
+      expect(change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
-      expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      detail = change.details['state']
+      expect(detail.before).to eq('registered')
+      expect(detail.after).to eq('attended')
     end
   end
 

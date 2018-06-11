@@ -51,7 +51,6 @@ module Crm; module Core
         offset: @settings[:offset],
         sort_by: @settings[:sort_by],
         sort_order: @settings[:sort_order],
-        include_deleted: @settings[:include_deleted]
       )
     end
 
@@ -163,23 +162,6 @@ module Crm; module Core
     # @api public
     def desc
       sort_order('desc')
-    end
-
-    # Returns a new {SearchConfigurator} constructed by combining this configuration
-    # with the given +include_deleted+ flag.
-    # @param new_include_deleted [Boolean] whether to include deleted items in the results.
-    # @return [SearchConfigurator]
-    # @api public
-    def include_deleted(new_include_deleted = true)
-      SearchConfigurator.new(@settings.merge(include_deleted: new_include_deleted))
-    end
-
-    # Returns a new {SearchConfigurator} constructed by combining this configuration
-    # and excluding deleted items.
-    # @return [SearchConfigurator]
-    # @api public
-    def exclude_deleted
-      include_deleted(false)
     end
 
     # @!endgroup

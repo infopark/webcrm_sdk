@@ -97,48 +97,7 @@ describe 'mailing features' do
       expect{
         outdated_mailing.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete mailing
-      expect(mailing).to_not be_deleted
       mailing.delete
-      expect(mailing).to be_deleted
-      expect(Crm::Mailing.find(mailing.id)).to be_deleted
-
-      # fail, when already deleted
-      expect {
-        mailing.delete
-      }.to raise_error(Crm::Errors::ItemStatePreconditionFailed) do |error|
-        expect(error.unmet_preconditions).to eq(
-            [{"code" => "destroyable", "message" => "The mailing cannot be deleted."}])
-      end
-    end
-  end
-
-  describe 'undelete' do
-    let(:mailing) do
-      Crm::Mailing.create({
-        title: 'My Mailing',
-        type_id: 'newsletter',
-      })
-    end
-
-    before do
-      mailing.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(mailing).to be_deleted
-      mailing.undelete
-      expect(mailing).to_not be_deleted
-      expect(Crm::Mailing.find(mailing.id)).to_not be_deleted
-
-      # fail, when not deleted
-      expect {
-        mailing.undelete
-      }.to raise_error(Crm::Errors::ItemStatePreconditionFailed) do |error|
-        expect(error.unmet_preconditions).to eq(
-            [{"code" => "undeletable", "message" => "The mailing cannot be restored."}])
-      end
     end
   end
 
@@ -151,22 +110,22 @@ describe 'mailing features' do
     end
 
     before do
-      mailing.delete
+      mailing.update({title: 'My Mailing 2'})
     end
 
     it 'looks for changes' do
       changes = mailing.changes
       expect(changes.length).to eq(1)
 
-      delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+      change = changes.detect do |change|
+        change.details.has_key?('title')
       end
-      expect(delete_change.changed_at).to be_a(Time)
-      expect(delete_change.changed_by).to eq('root')
+      expect(change.changed_at).to be_a(Time)
+      expect(change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
-      expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      detail = change.details['title']
+      expect(detail.before).to eq('My Mailing')
+      expect(detail.after).to eq('My Mailing 2')
     end
   end
 

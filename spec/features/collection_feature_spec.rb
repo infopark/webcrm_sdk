@@ -93,38 +93,7 @@ describe 'collection features' do
       expect{
         outdated_account.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete collection
-      expect(collection).to_not be_deleted
       collection.delete
-      expect(collection).to be_deleted
-      expect(Crm::Collection.find(collection.id)).to be_deleted
-
-      # fail, when precondition not met
-      expect{ collection.delete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-  end
-
-  describe 'undelete' do
-    let(:collection) {
-      Crm::Collection.create({
-        title: 'My Collection',
-        collection_type: 'contact',
-      })
-    }
-
-    before do
-      collection.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(collection).to be_deleted
-      collection.undelete
-      expect(collection).to_not be_deleted
-      expect(Crm::Collection.find(collection.id)).to_not be_deleted
-
-      # fail, when precondition not met
-      expect{ collection.undelete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
     end
   end
 
@@ -137,22 +106,22 @@ describe 'collection features' do
     }
 
     before do
-      collection.delete
+      collection.update({title: 'My Collection 2'})
     end
 
     it 'looks for changes' do
       changes = collection.changes
       expect(changes.length).to eq(1)
 
-      delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+      change = changes.detect do |change|
+        change.details.has_key?('title')
       end
-      expect(delete_change.changed_at).to be_a(Time)
-      expect(delete_change.changed_by).to eq('root')
+      expect(change.changed_at).to be_a(Time)
+      expect(change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
-      expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      detail = change.details['title']
+      expect(detail.before).to eq('My Collection')
+      expect(detail.after).to eq('My Collection 2')
     end
   end
 

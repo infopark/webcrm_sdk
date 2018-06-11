@@ -40,7 +40,7 @@ describe Searchable do
       (1..1001).map { |i| "abc#{i}" }
     end
 
-    it 'returns an ItemEnumerator will all IDs of this base type (without deleted)' do
+    it 'returns an ItemEnumerator will all IDs of this base type' do
       expect(Crm).to receive(:search) do |options|
         expect(options[:filters]).to eq([{
           field: 'base_type',
@@ -56,25 +56,6 @@ describe Searchable do
       all_items = MyResource.all
       expect(all_items).to be_a(ItemEnumerator)
       expect(all_items.ids).to eq(item_ids)
-    end
-
-    context '.all(include_deleted: true)' do
-      it 'includes IDs of deleted items' do
-        expect(Crm).to receive(:search) do |named_parameter|
-          expect(named_parameter[:include_deleted]).to be(true)
-        end
-        MyResource.all(include_deleted: true)
-      end
-    end
-
-    context '.all(include_deleted: false)' do
-      it 'includes IDs of deleted items' do
-        expect(Crm).to receive(:search) do |named_parameter|
-          expect(named_parameter[:include_deleted]).to be(false)
-        end
-
-        MyResource.all(include_deleted: false)
-      end
     end
   end
 

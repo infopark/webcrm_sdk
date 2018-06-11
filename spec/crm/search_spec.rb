@@ -327,30 +327,6 @@ describe '.search' do
       expect(item_enum.total).to eq(10)
     end
   end
-
-  context 'with include_deleted = true' do
-    let(:item_ids) do
-      (1..10).map { |i| "abc#{i}" }
-    end
-
-    it 'searches with deleted included' do
-      expect(Core::RestApi.instance).to receive(:post).with(
-        'search', {
-          'limit' => 100,
-          'offset' => 0,
-          'include_deleted' => true,
-        }
-      ).and_return({
-        'results' => search_result_items,
-        'total' => 10,
-      })
-
-      item_enum = Crm.search(include_deleted: true)
-      expect(item_enum).to be_a(Core::ItemEnumerator)
-      expect(item_enum.ids).to eq(item_ids)
-      expect(item_enum.total).to eq(10)
-    end
-  end
 end
 
 end

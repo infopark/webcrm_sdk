@@ -58,8 +58,7 @@ module Crm
     end
 
     # +ItemStatePreconditionFailed+ is raised if one or more preconditions
-    # for the attempted action were not satisfied. For example, a deleted item cannot be updated.
-    # It must be undeleted first.
+    # for the attempted action were not satisfied.
     # @api public
     class ItemStatePreconditionFailed < ClientError
       # Returns the unmet preconditions.

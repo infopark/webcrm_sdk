@@ -11,7 +11,6 @@ describe SearchConfigurator do
           expect(options.delete(:offset)).to be_nil
           expect(options.delete(:sort_by)).to be_nil
           expect(options.delete(:sort_order)).to be_nil
-          expect(options.delete(:include_deleted)).to be_nil
 
           expect(options).to eq({})
 
@@ -38,7 +37,6 @@ describe SearchConfigurator do
       offset: 17,
       sort_by: 'title',
       sort_order: 'asc',
-      include_deleted: true
     })
   end
 
@@ -58,7 +56,6 @@ describe SearchConfigurator do
           expect(options.delete(:offset)).to eq(17)
           expect(options.delete(:sort_by)).to eq('title')
           expect(options.delete(:sort_order)).to eq('asc')
-          expect(options.delete(:include_deleted)).to be(true)
 
           expect(options).to eq({})
         end
@@ -98,7 +95,6 @@ describe SearchConfigurator do
           expect(options.delete(:offset)).to eq(17)
           expect(options.delete(:sort_by)).to eq('title')
           expect(options.delete(:sort_order)).to eq('asc')
-          expect(options.delete(:include_deleted)).to be(true)
 
           expect(options).to eq({})
         end
@@ -134,7 +130,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(17)
         expect(options.delete(:sort_by)).to eq('title')
         expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(true)
 
         expect(options).to eq({})
       end
@@ -155,7 +150,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(17)
         expect(options.delete(:sort_by)).to eq('title')
         expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(true)
 
         expect(options).to eq({})
       end
@@ -176,7 +170,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(17)
         expect(options.delete(:sort_by)).to eq('title')
         expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(true)
 
         expect(options).to eq({})
       end
@@ -197,7 +190,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(23)
         expect(options.delete(:sort_by)).to eq('title')
         expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(true)
 
         expect(options).to eq({})
       end
@@ -218,7 +210,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(17)
         expect(options.delete(:sort_by)).to eq('created_at')
         expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(true)
 
         expect(options).to eq({})
       end
@@ -239,7 +230,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(17)
         expect(options.delete(:sort_by)).to eq('title')
         expect(options.delete(:sort_order)).to eq('desc')
-        expect(options.delete(:include_deleted)).to be(true)
 
         expect(options).to eq({})
       end
@@ -260,7 +250,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(17)
         expect(options.delete(:sort_by)).to eq('title')
         expect(options.delete(:sort_order)).to eq('desc')
-        expect(options.delete(:include_deleted)).to be(true)
 
         expect(options).to eq({})
       end
@@ -278,7 +267,6 @@ describe SearchConfigurator do
         offset: 17,
         sort_by: 'title',
         sort_order: 'desc',
-        include_deleted: true
       })
     end
 
@@ -293,62 +281,6 @@ describe SearchConfigurator do
         expect(options.delete(:offset)).to eq(17)
         expect(options.delete(:sort_by)).to eq('title')
         expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(true)
-
-        expect(options).to eq({})
-      end
-
-      configurator.perform_search
-    end
-  end
-
-  describe '#exclude_deleted and #include_deleted' do
-    it 'changes include_deleted, and keeps everything else' do
-      configurator = initial_configurator.exclude_deleted
-      expect(configurator).to be_a(SearchConfigurator)
-
-      expect(Crm).to receive(:search) do |options|
-        expect(options.delete(:filters)).to eq([{field: :title, condition: 'equals', value: 'welcome'}],)
-        expect(options.delete(:query)).to eq('initial query')
-        expect(options.delete(:limit)).to eq(8)
-        expect(options.delete(:offset)).to eq(17)
-        expect(options.delete(:sort_by)).to eq('title')
-        expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(false)
-
-        expect(options).to eq({})
-      end
-
-      configurator.perform_search
-
-      configurator = configurator.include_deleted
-      expect(configurator).to be_a(SearchConfigurator)
-
-      expect(Crm).to receive(:search) do |options|
-        expect(options.delete(:filters)).to eq([{field: :title, condition: 'equals', value: 'welcome'}],)
-        expect(options.delete(:query)).to eq('initial query')
-        expect(options.delete(:limit)).to eq(8)
-        expect(options.delete(:offset)).to eq(17)
-        expect(options.delete(:sort_by)).to eq('title')
-        expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(true)
-
-        expect(options).to eq({})
-      end
-
-      configurator.perform_search
-
-      configurator = configurator.include_deleted(false)
-      expect(configurator).to be_a(SearchConfigurator)
-
-      expect(Crm).to receive(:search) do |options|
-        expect(options.delete(:filters)).to eq([{field: :title, condition: 'equals', value: 'welcome'}],)
-        expect(options.delete(:query)).to eq('initial query')
-        expect(options.delete(:limit)).to eq(8)
-        expect(options.delete(:offset)).to eq(17)
-        expect(options.delete(:sort_by)).to eq('title')
-        expect(options.delete(:sort_order)).to eq('asc')
-        expect(options.delete(:include_deleted)).to be(false)
 
         expect(options).to eq({})
       end

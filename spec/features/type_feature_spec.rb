@@ -134,41 +134,6 @@ describe 'type features' do
       expect{
         outdated_type.delete
       }.to raise_error(Crm::Errors::ResourceConflict)
-
-      # delete type
-      expect(type).to_not be_deleted
-      type.delete
-      expect(type).to be_deleted
-      expect(Crm::Type.find(type.id)).to be_deleted
-
-      # fail, when precondition not met
-      expect{ type.delete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-  end
-
-  describe 'undelete' do
-    let(:type) do
-      Crm::Type.create({
-        id: type_id,
-        item_base_type: 'Activity',
-      })
-    end
-
-    before do
-      type.delete
-    end
-
-    it 'undeletes under certain conditions' do
-      expect(type).to be_deleted
-      type.undelete
-      expect(type).to_not be_deleted
-      expect(Crm::Type.find(type.id)).to_not be_deleted
-
-      # fail, when precondition not met
-      expect{ type.undelete }.to raise_error(Crm::Errors::ItemStatePreconditionFailed)
-    end
-
-    after do
       type.delete
     end
   end
@@ -182,22 +147,22 @@ describe 'type features' do
     end
 
     before do
-      type.delete
+      type.update({detail_info_template: 'foo'})
     end
 
     it 'looks for changes' do
       changes = type.changes
       expect(changes.length).to eq(1)
 
-      delete_change = changes.detect do |change|
-        change.details.has_key?('deleted_at')
+      change = changes.detect do |change|
+        change.details.has_key?('detail_info_template')
       end
-      expect(delete_change.changed_at).to be_a(Time)
-      expect(delete_change.changed_by).to eq('root')
+      expect(change.changed_at).to be_a(Time)
+      expect(change.changed_by).to eq('root')
 
-      detail = delete_change.details['deleted_at']
+      detail = change.details['detail_info_template']
       expect(detail.before).to be_nil
-      expect(detail.after).to be_a(String)
+      expect(detail.after).to eq('foo')
     end
   end
 
@@ -206,9 +171,6 @@ describe 'type features' do
       result = Crm::Type.all
       expect(result.map(&:id)).to include('collection')
       expect(result.map(&:item_base_type)).to include('Collection')
-
-      result_with_deleted  = Crm::Type.all(include_deleted: true)
-      expect(result.count).to be <= result_with_deleted.count
     end
   end
 end

@@ -213,18 +213,6 @@ contact.changes.each do |change|
 end
 ```
 
-### All resources can be undeleted
-
-Previously, there was no way to undelete a deleted resource by means of the API.
-With the API 2, all resources have an `undelete` method.
-
-```ruby
-contact = Crm::Contact.find(contact_id)
-contact.deleted? # => true
-contact.undelete
-contact.deleted? # => false
-```
-
 ## The individual resources: changes & features
 
 ### Search
@@ -293,7 +281,6 @@ All items associated with the account to be deleted, e.g. activities, are transf
 ```ruby
 account_to_delete = Crm::Account.find(account_id)
 account_to_delete.merge_and_delete(target_account_id)
-account_to_delete.deleted? # => true
 ```
 
 ### Activities
