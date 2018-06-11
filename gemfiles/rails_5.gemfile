@@ -11,9 +11,9 @@ gem "redcarpet"
 gem "rest-client"
 gem "rspec-autotest"
 gem "rspec", "~> 3.5"
-gem "webmock", "~> 2.1", :require => false
+gem "webmock", "~> 2.1", require: false
 gem "yard"
 gem "actionpack", "~> 5.0"
 gem "activesupport", "~> 5.0"
 
-gemspec :path => "../"
+gemspec path: "../"
