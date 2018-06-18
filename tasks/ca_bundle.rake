@@ -6,7 +6,7 @@ task :build_ca_bundle => "config" do
   ca_bundle = CaBundle.new(cert_path)
   unless ENV['TRAVIS']
     ca_bundle.create
-    unless %x{git status -- #{cert_path}}.include?("nothing to commit, working directory clean")
+    unless %x{git status -- #{cert_path}}.include?("nothing to commit")
       raise "config/ca-bundle.crt changed. Please commit before proceeding!"
     end
   end
