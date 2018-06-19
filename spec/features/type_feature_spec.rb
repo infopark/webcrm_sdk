@@ -154,8 +154,8 @@ describe 'type features' do
       changes = type.changes
       expect(changes.length).to eq(1)
 
-      change = changes.detect do |change|
-        change.details.has_key?('detail_info_template')
+      change = changes.detect do |c|
+        c.details.has_key?('detail_info_template')
       end
       expect(change.changed_at).to be_a(Time)
       expect(change.changed_by).to eq('root')

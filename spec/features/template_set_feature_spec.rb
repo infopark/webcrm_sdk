@@ -49,8 +49,8 @@ describe 'template set features' do
     it 'looks for changes' do
       changes = template_set.changes
 
-      my_change = changes.detect do |change|
-        change.details['templates.foo'].after == random_change
+      my_change = changes.detect do |c|
+        c.details['templates.foo'].after == random_change
       end
       expect(my_change).to be_present
       expect(my_change.changed_at).to be_a(Time)

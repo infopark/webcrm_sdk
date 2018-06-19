@@ -95,8 +95,8 @@ describe 'account features' do
       changes = account.changes
       expect(changes.length).to eq(1)
 
-      change = changes.detect do |change|
-        change.details.has_key?('name')
+      change = changes.detect do |c|
+        c.details.has_key?('name')
       end
       expect(change.changed_at).to be_a(Time)
       expect(change.changed_by).to eq('root')
