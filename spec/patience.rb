@@ -2,7 +2,7 @@ module Patience
   DEFAULT_SLEEP   = 0.25
   DEFAULT_TIMEOUT = 120
 
-  NotifyTimeout = Class.new(TimeoutError)
+  NotifyTimeout = Class.new(Timeout::Error)
   TimeoutError  = Class.new(Interrupt)
 
   #
