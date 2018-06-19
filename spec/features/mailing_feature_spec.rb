@@ -285,10 +285,7 @@ describe 'mailing features' do
 
       expect {
         mailing.release
-      }.to raise_error(Crm::Errors::ItemStatePreconditionFailed) do |error|
-        expect(error.unmet_preconditions).to eq(
-            [{"code" => "releasable", "message" => "The mailing cannot be released."}])
-      end
+      }.to raise_error(Crm::Errors::ResourceNotFound)
     end
   end
 
