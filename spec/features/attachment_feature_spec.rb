@@ -15,7 +15,7 @@ describe 'attachment features' do
     readme_attachment = activity.comments.first.attachments.first
     download_response = RestClient.get(readme_attachment.download_url)
     expect(download_response.body).to eq(File.read('README.md'))
-    expect(download_response.headers[:content_type]).to eq('text/plain')
+    expect(download_response.headers[:content_type]).to eq('text/markdown')
 
     # update with file
     activity_to_be_updated = Crm::Activity.create({
@@ -30,7 +30,7 @@ describe 'attachment features' do
     readme_attachment = activity_to_be_updated.comments.first.attachments.first
     download_response = RestClient.get(readme_attachment.download_url)
     expect(download_response.body).to eq(File.read('README.md'))
-    expect(download_response.headers[:content_type]).to eq('text/plain')
+    expect(download_response.headers[:content_type]).to eq('text/markdown')
 
     # upload another file manually
     permission = Crm::Core::AttachmentStore.generate_upload_permission
