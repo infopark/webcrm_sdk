@@ -10,7 +10,7 @@ module Crm; module Core
       info { "#{event.payload[:method].to_s.upcase} #{event.payload[:resource_path]}" }
       request_payload = event.payload[:request_payload]
       if request_payload.present?
-        debug { "  request body: #{parameter_filter.filter(request_payload)}" }
+        debug { "  request body: #{parameter_filter.filter({data: request_payload})[:data]}" }
       end
     end
 
@@ -21,7 +21,7 @@ module Crm; module Core
       }
       debug {
         response_payload = MultiJson.load(r.body)
-        "  response body: #{parameter_filter.filter(response_payload)}"
+        "  response body: #{parameter_filter.filter({data: response_payload})[:data]}"
       }
     end
 
