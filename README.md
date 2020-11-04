@@ -110,7 +110,7 @@ Crm::Contact.where(:locality, :equals, 'Boston').
 
 ## License
 
-Copyright (c) 2015 - 2018 [Infopark AG](https://infopark.com).
+Copyright (c) 2015 - 2020 [Infopark AG](https://infopark.com).
 
 This software can be used and modified in accordance with the GNU Lesser General Public License
 (LGPL-3.0). Please refer to LICENSE for details.

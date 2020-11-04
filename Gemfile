@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'appraisal'
 gem 'autotest'
 gem 'github-markup'
 gem 'pry'
