@@ -46,6 +46,7 @@ The Infopark WebCRM SDK provides the following Infopark WebCRM resources to your
 * {Crm::EventContact}
 * {Crm::Event}
 * {Crm::Mailing}
+* {Crm::MailingDelivery}
 * {Crm::TemplateSet}
 * {Crm::Type}
 
