@@ -40,6 +40,17 @@ describe Mailing do
     end
   end
 
+  describe '#create' do
+    let(:mailing) { Mailing.new("id" => "abc") }
+
+    it 'clones a mailing' do
+      expect(Core::RestApi.instance).to receive(:post).with('mailings/abc/clone', {})
+        .and_return({"id" => "def"})
+      clone = mailing.clone
+      expect(clone.id).to eq('def')
+    end
+  end
+
   describe '#render_preview' do
     let(:mailing) { Mailing.new("id" => "abc") }
     let(:preview_output) {

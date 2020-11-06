@@ -19,6 +19,16 @@ module Crm
     # @!parse extend Core::Mixins::Modifiable::ClassMethods
     # @!parse extend Core::Mixins::Searchable::ClassMethods
 
+    # Clones a mailing.
+    # @example
+    #   mailing.clone
+    #   # => Crm::Mailing
+    # @return [BasicResource] the cloned mailing.
+    # @api public
+    def clone
+      self.class.new(Core::RestApi.instance.post("#{path}/clone", {}))
+    end
+
     # Renders a preview of the email for the given contact.
     # @example
     #   mailing.html_body

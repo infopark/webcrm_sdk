@@ -101,6 +101,21 @@ describe 'mailing features' do
     end
   end
 
+  describe 'clone' do
+    let(:mailing) do
+      Crm::Mailing.create({
+        title: 'My Mailing',
+        type_id: 'newsletter',
+      })
+    end
+
+    it 'clones the mailing' do
+      clone = mailing.clone
+      expect(clone.id).not_to eq(mailing.id)
+      expect(clone.title).to eq('My Mailing (Copy)')
+    end
+  end
+
   describe 'changes' do
     let(:mailing) do
       Crm::Mailing.create({
