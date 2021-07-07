@@ -1,4 +1,4 @@
-require 'action_dispatch'
+require "active_support/parameter_filter"
 
 module Crm; module Core
   class LogSubscriber < ActiveSupport::LogSubscriber
@@ -35,7 +35,7 @@ module Crm; module Core
     private
 
     def parameter_filter
-      @parameter_filter ||= ::ActionDispatch::Http::ParameterFilter.new(['password'])
+      @parameter_filter ||= ::ActiveSupport::ParameterFilter.new(['password'])
     end
   end
 end; end
