@@ -1,5 +1,5 @@
 module Crm
-  # An Infopark WebCRM collection is a saved search. To execute such a saved search, call {#compute}.
+  # A JustRelate WebCRM collection is a saved search. To execute such a saved search, call {#compute}.
   # The results are persisted and can be accessed by means of {#output_items}.
   # Output items can be {Account accounts}, {Contact contacts}, {Activity activities},
   # and {Event events}.

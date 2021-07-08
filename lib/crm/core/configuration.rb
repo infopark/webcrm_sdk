@@ -41,7 +41,7 @@ module Crm; module Core
     end
 
     # The {http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html logger} of the
-    # Infopark WebCRM SDK. It logs request URLs according to the +:info+ level.
+    # JustRelate WebCRM SDK. It logs request URLs according to the +:info+ level.
     # Additionally, it logs request and response payloads according to the +:debug+ level.
     # Password fields are filtered out.
     # In a Rails environment, the logger defaults to +Rails.logger+. Otherwise, no logger is set.

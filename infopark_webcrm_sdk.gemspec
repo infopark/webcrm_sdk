@@ -9,13 +9,13 @@ Gem::Specification.new do |spec|
       raise "git describe failed" unless $?.success?
     end
   end
-  spec.authors       = 'Infopark AG'
-  spec.email         = 'info@infopark.de'
-  spec.summary       = 'Infopark WebCRM SDK'
+  spec.authors       = 'JustRelate Group GmbH'
+  spec.email         = 'info@justrelate.com'
+  spec.summary       = 'JustRelate WebCRM SDK'
   spec.description   = %{
-    Infopark WebCRM is a professional cloud CRM built for Ruby.
-    For more information about Infopark WebCRM, please visit https://infopark.com/.
-    For more information about the Infopark WebCRM SDK for Ruby, please visit
+    JustRelate WebCRM is a professional cloud CRM built for Ruby.
+    For more information about JustRelate WebCRM, please visit https://justrelate.com/.
+    For more information about the JustRelate WebCRM SDK for Ruby, please visit
     http://www.rubydoc.info/gems/infopark_webcrm_sdk
   }
   spec.homepage      = 'https://github.com/infopark/webcrm_sdk'

@@ -2,7 +2,7 @@ require "active_support/concern"
 
 module Crm; module Core; module Mixins
   # +Modifiable+ is a collection of methods that are used to {ClassMethods#create .create},
-  # {#update} and {#delete} an Infopark WebCRM item.
+  # {#update} and {#delete} a JustRelate WebCRM item.
   # @api public
   module Modifiable
     extend ActiveSupport::Concern

@@ -1,5 +1,5 @@
 module Crm
-  # An Infopark WebCRM event contains all data associated with an event such
+  # A JustRelate WebCRM event contains all data associated with an event such
   # as a conference or a trade show. An event has participants ({EventContact}).
   # @api public
   class Event < Core::BasicResource

@@ -1,7 +1,7 @@
 describe 'mailing features' do
   before(:all) { CrmSetup.define_newsletter_mailing }
   let(:now) { Time.now.utc.xmlschema }
-  let(:valid_sender) { 'support@infopark.de' }
+  let(:valid_sender) { 'support@justrelate.com' }
 
   describe 'create' do
     it 'creates under certain conditions' do
@@ -168,7 +168,7 @@ describe 'mailing features' do
 
     it 'renders the correct preview' do
       expect(mailing.render_preview(contact.id)).to eq({
-        "email_from" => "Marketing <support@infopark.de>",
+        "email_from" => "Marketing <support@justrelate.com>",
         "email_reply_to" => "marketing-replyto@example.com",
         "email_subject" => "Invitation to exhibition",
         "email_to" => "success@simulator.amazonses.com",

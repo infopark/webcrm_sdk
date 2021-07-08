@@ -1,5 +1,5 @@
 module Crm
-  # An Infopark WebCRM account is an organizational entity such as a company.
+  # A JustRelate WebCRM account is an organizational entity such as a company.
   # @api public
   class Account < Core::BasicResource
     include Core::Mixins::Findable
