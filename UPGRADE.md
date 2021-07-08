@@ -155,7 +155,7 @@ We recommend using the `active_attr` gem to simplify implementing the `ActiveMod
 
 ### Accessing attributes
 
-You can access the attributes of an JustRelate WebCRM SDK resource by means of method calls or the `[]` operator.
+You can access the attributes of a JustRelate WebCRM SDK resource by means of method calls or the `[]` operator.
 
 ```ruby
 contact = Crm::Contact.find(contact_id)
@@ -167,7 +167,7 @@ contact["last_name"] # => "Smith"
 ### Every attribute has a sane value
 
 Attributes not set have a default value according to their attribute type.
-Assuming that an JustRelate WebCRM contact has no value for the `first_name` string attribute, reading it results in `""`, the empty string, not `nil`.
+Assuming that a JustRelate WebCRM contact has no value for the `first_name` string attribute, reading it results in `""`, the empty string, not `nil`.
 The same rule applies to numbers, boolean, arrays and hashes.
 
 The only exception to this rule are date attributes whose values are in fact `nil` if they are not set.
@@ -319,7 +319,7 @@ When uploading attachments using Ruby, we recommend utilizing the implicit uploa
 ### Collections
 
 The `Collection` API is new.
-An JustRelate WebCRM collection is a saved search.
+A JustRelate WebCRM collection is a saved search.
 The search filters as well as the search results are part of the collection.
 
 ```ruby

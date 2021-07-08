@@ -1,7 +1,6 @@
 # Infopark WebCRM SDK
 
 [![Gem Version](https://badge.fury.io/rb/infopark_webcrm_sdk.svg)](http://badge.fury.io/rb/infopark_webcrm_sdk)
-[![Build Status](https://travis-ci.org/infopark/webcrm_sdk.svg?branch=master)](https://travis-ci.org/infopark/webcrm_sdk)
 
 [JustRelate WebCRM](https://justrelate.com/) is a cloud-based CRM.
 The JustRelate WebCRM SDK makes CRM content available to your Ruby application.
@@ -111,7 +110,7 @@ Crm::Contact.where(:locality, :equals, 'Boston').
 
 ## License
 
-Copyright (c) 2015 - 2020 [JustRelate](https://justrelate.com).
+Copyright (c) 2015 - 2021 [JustRelate Group GmbH](https://justrelate.com).
 
 This software can be used and modified in accordance with the GNU Lesser General Public License
 (LGPL-3.0). Please refer to LICENSE for details.

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
       raise "git describe failed" unless $?.success?
     end
   end
-  spec.authors       = 'JustRelate'
+  spec.authors       = 'JustRelate Group GmbH'
   spec.email         = 'info@justrelate.com'
   spec.summary       = 'JustRelate WebCRM SDK'
   spec.description   = %{
