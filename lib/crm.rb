@@ -4,7 +4,7 @@ require 'crm/errors'
 
 # @api public
 module Crm
-  # Configures the Infopark WebCRM SDK.
+  # Configures the JustRelate WebCRM SDK.
   # The config keys +tenant+, +login+ and +api_key+ must be provided.
   # @example
   #   Crm.configure do |config|

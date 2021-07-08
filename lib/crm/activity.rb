@@ -1,5 +1,5 @@
 module Crm
-  # An Infopark WebCRM activity is a record of an action or a sequence of actions,
+  # A JustRelate WebCRM activity is a record of an action or a sequence of actions,
   # for example a support case.
   # It can be associated with an {Account account} or a {Contact contact}.
   #

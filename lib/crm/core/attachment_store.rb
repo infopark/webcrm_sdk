@@ -24,15 +24,15 @@ module Crm; module Core
   #    The format of +comment_attachments+ is
   #    <tt>["upload_id/filename.ext", ...]</tt>,
   #    e.g. <tt>["e13f0d960feeb2b2903bd/screenshot.jpg"]</tt>.
-  #    Infopark WebCRM in turn translates these upload IDs to attachment IDs.
+  #    JustRelate WebCRM in turn translates these upload IDs to attachment IDs.
   #    Syntactically they look the same. Upload IDs, however, are only temporary,
   #    whereas attachment IDs are permanent. If the client appended a filename to the upload ID,
   #    the attachment ID will contain this filename, too. Otherwise, the attachment ID ends
-  #    with <tt>"/file"</tt>. Please note that Infopark WebCRM replaces filename characters other
+  #    with <tt>"/file"</tt>. Please note that JustRelate WebCRM replaces filename characters other
   #    than <tt>a-zA-Z0-9.+-</tt> with a dash. Multiple dashes will be joined into a single dash.
   # 4. Later, when downloading the attachment, pass the attachment ID to
   #    {Crm::Core::AttachmentStore.generate_download_url}.
-  #    Infopark WebCRM returns a signed AWS S3 URL that remains valid for 5 minutes.
+  #    JustRelate WebCRM returns a signed AWS S3 URL that remains valid for 5 minutes.
   # @api public
   class AttachmentStore
     # +Permission+ holds all the pieces of information required to upload an {AttachmentStore attachment}.

@@ -1,10 +1,10 @@
 # Upgrade Guide
 
-This guide assists you in upgrading from the **Infopark WebCRM Connector** (which uses API 1) to **Infopark WebCRM SDK** (which uses API 2).
+This guide assists you in upgrading from the **Infopark WebCRM Connector** (which uses API 1) to **JustRelate WebCRM SDK** (which uses API 2).
 
-You can upgrade incrementally to the Infopark WebCRM SDK.
+You can upgrade incrementally to the JustRelate WebCRM SDK.
 This means that you don't need to upgrade your whole project at once.
-Instead, include both the Infopark WebCRM Connector and the Infopark WebCRM SDK in your project and replace the code use case by use case.
+Instead, include both the Infopark WebCRM Connector and the JustRelate WebCRM SDK in your project and replace the code use case by use case.
 Finally, remove the Infopark WebCRM Connector from the project.
 
 To begin with, put both gems into the `Gemfile` of your project:
@@ -16,9 +16,9 @@ gem "infopark_webcrm_sdk"
 
 Please note that `infopark_crm_connector` does not support Rails 5. The latest supported version of Rails is 4.
 
-## Configuring the Infopark WebCRM SDK
+## Configuring the  JustRelate WebCRM SDK
 
-Then, configure the Infopark WebCRM SDK to use your personal credentials when connecting to the Infopark WebCRM REST API.
+Then, configure the JustRelate WebCRM SDK to use your personal credentials when connecting to the JustRelate WebCRM REST API.
 You probably have a `webcrm.rb` or `crm_connector.rb` initializer file in your project which already contains the Infopark WebCRM Connector configuration.
 Add the following lines to this file.
 
@@ -38,7 +38,7 @@ Instead of reading the configuration values from the `ENV` you may also want to 
 
 ### The Crm namespace
 
-All Infopark WebCRM SDK classes live under the `Crm` namespace whereas Infopark WebCRM Connector classes live under the `Infopark::Crm` namespace.
+All JustRelate WebCRM SDK classes live under the `Crm` namespace whereas Infopark WebCRM Connector classes live under the `Infopark::Crm` namespace.
 
 ```ruby
 # old:
@@ -48,7 +48,7 @@ Crm::Contact.find(contact_id)
 ```
 
 In case the resource could not be found, a `Crm::Errors::ResourceNotFound` error is raised.
-Infopark WebCRM SDK will never raise an `ActiveResource::ResourceNotFound` error.
+JustRelate WebCRM SDK will never raise an `ActiveResource::ResourceNotFound` error.
 More on errors in the next section.
 
 ### Errors tell exactly what went wrong
@@ -64,7 +64,7 @@ rescue Crm::Errors::ResourceNotFound => e
 end
 ```
 
-Or, when the Infopark WebCRM backend refuses to save a resource due to unsatisfied validation rules, the error contains the details.
+Or, when the JustRelate WebCRM backend refuses to save a resource due to unsatisfied validation rules, the error contains the details.
 
 ```ruby
 begin
@@ -97,9 +97,9 @@ end
 
 Validation errors contain the names of the attributes whose values are invalid, symbolic codes that you can use to look up custom translations of the error messages and English messages for convenience.
 The symbolic codes are the Rails validation error codes where possible, e.g. `blank` and `inclusion`.
-Infopark WebCRM adds its own codes such as `invalid_comment_contact_id` and `liquid_syntax_error`.
+JustRelate WebCRM adds its own codes such as `invalid_comment_contact_id` and `liquid_syntax_error`.
 
-Furthermore, when updating a resource, Infopark WebCRM complains about attributes not defined in the resource type.
+Furthermore, when updating a resource, JustRelate WebCRM complains about attributes not defined in the resource type.
 
 ```ruby
 begin
@@ -121,13 +121,13 @@ end
 
 However, trying to set an internal read-only attribute such as `created_at` is ignored.
 
-A list of errors and their properties can be found in the Infopark WebCRM SDK YARD docs.
+A list of errors and their properties can be found in the JustRelate WebCRM SDK YARD docs.
 
 ### Write form models including their custom logic for every use case
 
-One big change in the Infopark WebCRM SDK is that model classes are no longer based on `ActiveResource`.
+One big change in the JustRelate WebCRM SDK is that model classes are no longer based on `ActiveResource`.
 They are much simpler now, and they don't behave like `ActiveModel` objects any more.
-Instead of modifying a resource locally and then asking it to `save` itself,  the Infopark WebCRM SDK requires the resource to be changed by passing the new attribute values to the `update` method.
+Instead of modifying a resource locally and then asking it to `save` itself,  the JustRelate WebCRM SDK requires the resource to be changed by passing the new attribute values to the `update` method.
 Analogously, for creating a new resource, pass all of its attributes to `create`.
 
 ```ruby
@@ -148,14 +148,14 @@ contact.locality # => "Hamburg"
 ```
 
 This means that you can no longer use them as form objects in your controllers and views.
-You'd rather write a plain Ruby class for every use case, implement the `ActiveModel` interface and your custom logic in this class, and delegate to Infopark WebCRM SDK models for communicating with the Infopark WebCRM REST API.
+You'd rather write a plain Ruby class for every use case, implement the `ActiveModel` interface and your custom logic in this class, and delegate to JustRelate WebCRM SDK models for communicating with the JustRelate WebCRM REST API.
 For further details, see the API docs.
 
 We recommend using the `active_attr` gem to simplify implementing the `ActiveModel` interface.
 
 ### Accessing attributes
 
-You can access the attributes of an Infopark WebCRM SDK resource by means of method calls or the `[]` operator.
+You can access the attributes of an JustRelate WebCRM SDK resource by means of method calls or the `[]` operator.
 
 ```ruby
 contact = Crm::Contact.find(contact_id)
@@ -167,7 +167,7 @@ contact["last_name"] # => "Smith"
 ### Every attribute has a sane value
 
 Attributes not set have a default value according to their attribute type.
-Assuming that an Infopark WebCRM contact has no value for the `first_name` string attribute, reading it results in `""`, the empty string, not `nil`.
+Assuming that an JustRelate WebCRM contact has no value for the `first_name` string attribute, reading it results in `""`, the empty string, not `nil`.
 The same rule applies to numbers, boolean, arrays and hashes.
 
 The only exception to this rule are date attributes whose values are in fact `nil` if they are not set.
@@ -178,7 +178,7 @@ The consequence of this is that you don't need to write a lot of `nil` checks an
 ### Renamed attributes
 
 A couple of attributes were renamed in API 2.
-You can access attributes using the Infopark WebCRM Connector and the old attribute name or the Infopark WebCRM SDK and the new attribute name.
+You can access attributes using the Infopark WebCRM Connector and the old attribute name or the JustRelate WebCRM SDK and the new attribute name.
 
 The following attributes were renamed for all resources.
 
@@ -189,7 +189,7 @@ Further attribute name changes are documented below.
 
 ### Authentication
 
-Infopark WebCRM SDK offers two methods for authenticating a contact.
+JustRelate WebCRM SDK offers two methods for authenticating a contact.
 
 1. `Crm::Contact.authenticate` returns the authenticated contact or `nil`.
 2. `Crm::Contact.authenticate!` returns the authenticated contact or raises a `Crm::Errors::AuthenticationFailed` error.
@@ -217,7 +217,7 @@ end
 
 ### Search
 
-Infopark WebCRM comes with a global search.
+JustRelate WebCRM comes with a global search.
 All resource types are searched simultaneously.
 The following example finds both accounts and contacts located in Rome.
 Both accounts and contacts have a locality attribute.
@@ -286,7 +286,7 @@ account_to_delete.merge_and_delete(target_account_id)
 ### Activities
 
 When associating an attachment with an activity comment, you can pass an open file instead of an attachment ID.
-In this case, the Infopark WebCRM SDK automatically uploads the file content using the attachments API.
+In this case, the JustRelate WebCRM SDK automatically uploads the file content using the attachments API.
 It then references this attachment ID in the `comment_attachments` field.
 
 ```ruby
@@ -319,7 +319,7 @@ When uploading attachments using Ruby, we recommend utilizing the implicit uploa
 ### Collections
 
 The `Collection` API is new.
-An Infopark WebCRM collection is a saved search.
+An JustRelate WebCRM collection is a saved search.
 The search filters as well as the search results are part of the collection.
 
 ```ruby
@@ -348,7 +348,7 @@ collection.output_items.each do |contact|
 end
 ```
 
-For details, see the Infopark WebCRM SDK docs.
+For details, see the JustRelate WebCRM SDK docs.
 
 ### Contacts
 

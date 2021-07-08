@@ -1,5 +1,5 @@
 module Crm; module Core
-  # +BasicResource+ is the base class of all Infopark WebCRM SDK resources.
+  # +BasicResource+ is the base class of all JustRelate WebCRM SDK resources.
   # @api public
   class BasicResource
     include Mixins::AttributeProvider

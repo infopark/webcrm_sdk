@@ -1,5 +1,5 @@
 module Crm
-  # An Infopark WebCRM event contact is a participant or a potential participant of an {Event}.
+  # A JustRelate WebCRM event contact is a participant or a potential participant of an {Event}.
   # @api public
   class EventContact < Core::BasicResource
     include Core::Mixins::Findable

@@ -1,10 +1,10 @@
 module Crm
-  # The purpose of an Infopark WebCRM mailing is to send an email, e.g. a newsletter,
+  # The purpose of a JustRelate WebCRM mailing is to send an email, e.g. a newsletter,
   # to several recipients.
   # The emails will be sent to the members of the contact collection associated with the mailing
   # (+mailing.collection_id+).
   #
-  # Infopark WebCRM uses the {http://liquidmarkup.org/ Liquid template engine} for evaluating
+  # JustRelate WebCRM uses the {http://liquidmarkup.org/ Liquid template engine} for evaluating
   # mailing content.
   # @api public
   class Mailing < Core::BasicResource

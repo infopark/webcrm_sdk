@@ -1,7 +1,7 @@
 module Crm
   # @api public
   module Errors
-    # +BaseError+ is the superclass of all Infopark WebCRM SDK errors.
+    # +BaseError+ is the superclass of all JustRelate WebCRM SDK errors.
     # @api public
     class BaseError < StandardError
     end

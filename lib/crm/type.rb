@@ -1,5 +1,5 @@
 module Crm
-  # An Infopark WebCRM type defines a set of attributes associated with every instance of the type.
+  # A JustRelate WebCRM type defines a set of attributes associated with every instance of the type.
   # @example Listing all attributes of a type
   #   account_type = Crm::Type.find('account')
   #   # => Crm::Type

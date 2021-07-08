@@ -1,5 +1,5 @@
 module Crm
-  # An Infopark WebCRM contact represents contact information about a person.
+  # A JustRelate WebCRM contact represents contact information about a person.
   # It can be associated with an {Account account}.
   # @api public
   class Contact < Core::BasicResource
