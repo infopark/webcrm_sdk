@@ -1,4 +1,4 @@
-# Infopark WebCRM SDK
+# JustRelate WebCRM SDK
 
 [![Gem Version](https://badge.fury.io/rb/infopark_webcrm_sdk.svg)](http://badge.fury.io/rb/infopark_webcrm_sdk)
 
