@@ -1,4 +1,8 @@
-require "active_support/parameter_filter"
+if ActiveSupport.version >= Gem::Version.new("6.0.0")
+  require "active_support/parameter_filter"
+else
+  require "action_dispatch"
+end
 
 module Crm; module Core
   class LogSubscriber < ActiveSupport::LogSubscriber
@@ -35,7 +39,12 @@ module Crm; module Core
     private
 
     def parameter_filter
-      @parameter_filter ||= ::ActiveSupport::ParameterFilter.new(['password'])
+      @parameter_filter ||=
+        if ActiveSupport.version >= Gem::Version.new("6.0.0")
+          ::ActiveSupport::ParameterFilter.new(['password'])
+        else
+          ::ActionDispatch::Http::ParameterFilter.new(['password'])
+        end
     end
   end
 end; end
