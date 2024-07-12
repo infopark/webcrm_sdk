@@ -110,7 +110,6 @@ Crm::Contact.where(:locality, :equals, 'Boston').
 
 ## License
 
-Copyright (c) 2015 - 2021 [JustRelate Group GmbH](https://justrelate.com).
+Copyright (c) 2015 - 2024 [JustRelate Group GmbH](https://justrelate.com).
 
-This software can be used and modified in accordance with the GNU Lesser General Public License
-(LGPL-3.0). Please refer to LICENSE for details.
+This software can be used and modified in accordance with the MIT license. Please refer to LICENSE for details.

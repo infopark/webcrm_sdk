@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
     http://www.rubydoc.info/gems/infopark_webcrm_sdk
   }
   spec.homepage      = 'https://github.com/infopark/webcrm_sdk'
-  spec.license       = 'LGPL-3.0'
+  spec.license       = 'MIT'
   spec.files         = ["README.md", "LICENSE", "UPGRADE.md", "config/ca-bundle.crt"] + Dir["lib/**/*"]
   spec.require_paths = ["lib"]
 
